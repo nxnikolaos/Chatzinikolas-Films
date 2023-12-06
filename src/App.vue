@@ -1,11 +1,11 @@
-<script setup></script>
+<script setup>
+import HomePage from './components/pages/HomePage.vue'
+</script>
 
 <template>
   <header></header>
 
-  <main>
-    <h1 class="text-center">Hello World</h1>
+  <main class="bg-neutral-800 h-screen flex justify-center py-8">
+    <HomePage />
   </main>
 </template>
-
-<style scoped></style>
