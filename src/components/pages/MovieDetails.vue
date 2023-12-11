@@ -3,11 +3,13 @@ import axios from 'axios'
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import MovieOverview from '../MovieOverview.vue'
+import MovieCast from '../MovieCast.vue'
 
 const route = useRoute()
 const pageId = route.params.id
 const movie = ref([])
 const posterUrl = ref('')
+const imgPath = 'https://image.tmdb.org/t/p/w185'
 
 onMounted(() => {
   const queryParams = {
@@ -16,7 +18,6 @@ onMounted(() => {
   }
   axios({
     method: 'get',
-    // url: `/api/movies/id`,
     url: `https://fontaine-films.onrender.com/api/movies/id`,
     params: queryParams
   })
@@ -31,7 +32,10 @@ onMounted(() => {
 })
 </script>
 <template>
-  <MovieOverview :post="movie" :imgUrl="posterUrl"></MovieOverview>
+  <div class="border-2 p-8 rounded-xl bg-neutral-700">
+    <MovieOverview :post="movie" :imgUrl="posterUrl"></MovieOverview>
+    <MovieCast :post="movie" :imgUrl="imgPath"></MovieCast>
+  </div>
 </template>
 
 <script>

@@ -8,7 +8,6 @@ const theatres = ref([])
 onMounted(() => {
   axios({
     method: 'get',
-    // url: "/api/movies/theatres",
     url: 'https://fontaine-films.onrender.com/api/movies/theatres'
   })
     .then(function (response) {
