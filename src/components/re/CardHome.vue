@@ -15,7 +15,10 @@ posterUrl.value = `https://image.tmdb.org/t/p/w342` + movie.poster_path
 <template>
   <article class="border-2 p-8 rounded-xl bg-neutral-700">
     <img :src="posterUrl" />
-    <h2 class="my-4 text-lg">{{ movie.original_title }}</h2>
+    <router-link :to="{ name: 'MovieDetails', params: { id: movie.id } }">
+      <h2 class="my-4 text-lg">{{ movie.original_title }}</h2>
+    </router-link>
+
     <p>
       {{ readMore ? movie.overview : `${movie.overview.substring(0, 200)}...` }}
       <button @click="toggle" class="block text-center my-4">
@@ -24,3 +27,9 @@ posterUrl.value = `https://image.tmdb.org/t/p/w342` + movie.poster_path
     </p>
   </article>
 </template>
+
+<script>
+export default {
+  name: 'CardHome'
+}
+</script>
