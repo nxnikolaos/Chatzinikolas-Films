@@ -1,19 +1,26 @@
 <script setup>
 import axios from 'axios'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import MovieOverview from '../MovieOverview.vue'
 import MovieCast from '../MovieCast.vue'
 
 const route = useRoute()
-const pageId = route.params.id
+const pageId = ref(route.params.id)
 const movie = ref([])
 const posterUrl = ref('')
 const imgPath = 'https://image.tmdb.org/t/p/w185'
 
-onMounted(() => {
+watch(
+  () => route.params.id,
+  (newPageId) => {
+    fetchData(newPageId)
+  }
+)
+
+const fetchData = (newPageId) => {
   const queryParams = {
-    paramId: Number(pageId),
+    paramId: Number(newPageId),
     actors: true
   }
   axios({
@@ -29,6 +36,10 @@ onMounted(() => {
     .catch(function (error) {
       console.log(error)
     })
+}
+
+onMounted(() => {
+  fetchData(pageId.value)
 })
 </script>
 <template>
