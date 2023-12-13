@@ -29,6 +29,13 @@ const fetchData = (value) => {
     })
 }
 
+const updateOpen = (value) => {
+  open.value = value
+}
+const clearSearch = () => {
+  input.value = ''
+}
+
 onMounted(() => {
   watch(
     () => input.value,
@@ -49,7 +56,12 @@ onMounted(() => {
       class="w-full px-4 py-2 rounded-t-lg"
       placeholder="Search movie..."
     />
-    <SearchResults v-if="open" :posts="results" :toggle="open"></SearchResults>
+    <SearchResults
+      v-if="open"
+      :posts="results"
+      :updateOpen="updateOpen"
+      :clearSearch="clearSearch"
+    ></SearchResults>
   </div>
 </template>
 
